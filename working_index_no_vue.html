@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Scheduler</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="style-copy.css">
+    <style>
+        html, body{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        Calendar Scheduler
+    </a>
+</nav>
+
+<div class="row" id="doc">
+    <div class="col-md-3">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
+
+        <hr>
+        <div style="display: block; margin: 0 auto;" class="container-fluid">
+            <h3>Select Date Range</h3>
+            <hr>
+            <label for="startDate">Start Date:</label>
+            <input type="text" id="startDate">
+            <hr>
+            <label for="endDate">Start Date:</label>
+            <input type="text" id="endDate">
+            <hr>
+        </div>
+        <br>
+        <button class="btn btn-block btn-success" @click="updateDateRange">Go</button>
+        <br>
+
+    </div>
+    <div class="col">
+
+        <h2>Calendar</h2>
+        <div v-if="startDate !== ''">
+            Showing Between <b>{{startDate}}</b> and <b>{{endDate}}</b>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-4 left-col">
+                <div class="left-calendar">
+                    <div class="header-row">
+                        <div class="info-div">Room</div>
+                        <div class="info-div">Status</div>
+                        <div class="info-div">Capacity</div>                    <!--Days of the month-->
+                    </div>
+
+                    <div class="room-item">
+                        <div class="info-div">B1</div>
+                        <div class="info-div">Ready</div>
+                        <div class="info-div">3</div>
+                    </div>
+
+                    <div class="room-item">
+                        <div class="info-div">B1</div>
+                        <div class="info-div">Ready</div>
+                        <div class="info-div">3</div>
+                    </div>
+
+                    <div class="room-item">
+                        <div class="info-div">B1</div>
+                        <div class="info-div">Ready</div>
+                        <div class="info-div">3</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col right-col">
+                <div class="right-calendar">
+                    <div class="table main-table">
+                        <!--<tr>-->
+                        <!--<td>-->
+                        <table class="inner-main-table">
+                            <thead>
+                            <tr>
+                                <td>
+                                    <div class="table-header-row">
+                                        <div>1</div>
+                                        <div>2</div>
+                                        <div>3</div>
+                                        <div>4</div>
+                                        <div>5</div>
+                                        <div>6</div>
+                                        <div>7</div>
+                                        <div>8</div>
+                                        <div>9</div>
+                                        <div>10</div>
+                                        <div>11</div>
+                                        <div>12</div>
+                                        <div>13</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="room-rows droppable-region"> <!--All Rooms-->
+                                        <div class="room-row"> <!-- Each Room -->
+                                            <div class="main-grid"><!-- the main grid also absolutely pos -->
+                                                <div class="day day1" data-target="day1">04-08-2017</div>
+                                                <div class="day day2" data-target="day2">04-08-2017</div>
+                                                <div class="day day3" data-target="day3">04-08-2017</div>
+                                                <div class="day day4" data-target="day4">04-08-2017</div>
+                                                <div class="day day5">04-08-2017</div>
+                                                <div class="day day6" data-target="day5">04-08-2017</div>
+                                                <div class="day day7" data-target="day6">04-08-2017</div>
+                                                <div class="day day8" data-target="day7">04-08-2017</div>
+                                                <div class="day day9" data-target="day8">04-08-2017</div>
+                                                <div class="day day10" data-target="day9">04-08-2017</div>
+                                                <div class="day day11" data-target="day10">04-08-2017</div>
+                                                <div class="day day12" data-target="day11">04-08-2017</div>
+                                                <div class="day day13" data-target="day12">04-08-2017</div>
+                                            </div>
+                                            <div class="skeleton"><!-- Absolutely positioned and contains the booking element -->
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                            <div class="draggable">
+                                                Bla Bla
+                                            </div>
+                                        </div>
+                                        <!--End of room 1-->
+                                        <div class="room-row"> <!-- Each Room -->
+                                            <div class="main-grid"><!-- the main grid also absolutely pos -->
+                                                <div class="day df"></div>
+                                                <div class="day ds"></div>
+                                                <div class="day d"></div>
+                                                <div class="day a"></div>
+                                                <div class="day y"></div>
+                                                <div class="day u"></div>
+                                                <div class="day s"></div>
+                                                <div class="day s"></div>
+                                                <div class="day h"></div>
+                                                <div class="day h"></div>
+                                                <div class="day h"></div>
+                                                <div class="day r2"></div>
+                                                <div class="day ew"></div>
+                                            </div>
+                                            <div class="skeleton"><!-- Absolutely positioned and contains the booking element -->
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="room-row"> <!-- Each Room -->
+                                            <div class="main-grid"><!-- the main grid also absolutely pos -->
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                                <div class="day"></div>
+                                            </div>
+                                            <div class="skeleton"><!-- Absolutely positioned and contains the booking element -->
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--</td>-->
+                        <!--</tr>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="custom.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#startDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy'
+        });
+        $('#endDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy'
+        });
+    });
+
+    var draggable_el = $('.draggable');
+
+    draggable_el.resizable({
+        containment: 'parent',
+        grid: [100, 0],
+        minWidth: 100
+    });
+
+    draggable_el.draggable({
+        containment: '.droppable-region',
+        delay: 300,
+        grid: [50, 100],
+        cursor: 'move',
+        distance: 50,
+        opacity: 0.3,
+        revert: function () {
+//            This function will be used to check if there is a booking on that time already
+            return false
+        },
+        start: function (event, ui) {
+            ui.helper.css('background-color', 'lightgray');
+//            console.log(ui.position.left)
+        },
+        stop: function (event, ui) {
+            ui.helper.css('background-color', '#2e3133');
+//            console.log(ui.position.left)
+        },
+        create: function (event, ui) {
+//            console.log(event) To get the draggable element object, event.target
+            var draggable = event.target;
+            draggable.offsetTop = draggable.offsetTop - 6;
+        }
+    });
+
+    $('.day').droppable({
+        drop: function (event, ui) {
+//            console.log(event.target.classList.value);
+            console.log(event.target);
+        },
+        tolerance: 'touch',
+        accept: '.draggable',
+        over: function (event, ui) {
+            ui.draggable.text('Something is hovering!');
+        },
+        out: function (event, ui) {
+            ui.draggable.text('Out!');
+        },
+        create: function (event, ui) {
+            //Launches when the droppable element is created
+        }
+    });
+
+</script>
+</body>
+</html>

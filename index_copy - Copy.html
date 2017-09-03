@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Scheduler</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="style-copy.css">
+    <style>
+        html, body{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        Calendar Scheduler
+    </a>
+</nav>
+
+<div class="row" id="doc">
+    <div class="col-md-3">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
+
+        <hr>
+        <div style="display: block; margin: 0 auto;" class="container-fluid">
+            <h3>Select Date Range</h3>
+            <hr>
+            <label for="startDate">Start Date:</label>
+            <input type="text" id="startDate" v-model="startDate">
+            <hr>
+            <label for="endDate">Start Date:</label>
+            <input type="text" id="endDate" v-model="endDate">
+            <hr>
+        </div>
+        <br>
+        <button class="btn btn-block btn-success" @click="updateDateRange">Go</button>
+        <br>
+
+    </div>
+    <div class="col">
+
+        <h2>Calendar</h2>
+        <div v-if="startDate !== ''">
+            Showing Between <b>{{startDate}}</b> and <b>{{endDate}}</b>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-4 left-col">
+                <div class="left-calendar">
+                    <div class="header-row">
+                        <div class="info-div">Room</div>
+                        <div class="info-div">Status</div>
+                        <div class="info-div">Capacity</div>                    <!--Days of the month-->
+                    </div>
+
+                    <div v-for="room in rooms" class="room-item">
+                        <div class="info-div">{{room.room_name}}</div>
+                        <div class="info-div">{{room.status}}</div>
+                        <div class="info-div">{{room.capacity}}</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col right-col">
+                <div class="right-calendar">
+                    <div class="table main-table">
+                        <!--<tr>-->
+                        <!--<td>-->
+                        <table class="inner-main-table">
+                            <thead>
+                            <tr>
+                                <td>
+                                    <div class="table-header-row">
+                                        <div v-for="date in datesToShow">{{ dayOfDate(date) }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="room-rows droppable-region"> <!--All Rooms-->
+                                        <div v-for="room in rooms" class="room-row" :data-value="room.room_name"> <!-- Each Room -->
+
+                                            <div class="main-grid"><!-- the main grid also absolutely pos -->
+                                                <div v-for="date in datesToShow" class="day" :data-target="date">{{date}}</div>
+                                            </div>
+                                            <div class="skeleton"><!-- Absolutely positioned and contains the booking element -->
+                                                <div v-for="date in datesToShow" class="day"></div>
+                                            </div>
+
+                                            <div class="draggable">
+                                                Bla Bla
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--</td>-->
+                        <!--</tr>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="custom%20-%20Copy.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#startDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy'
+        });
+
+        $('#endDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy'
+        });
+    });
+
+    function getFirstDayOfCurrentMonth(){
+        var date = new Date(),
+            y = date.getFullYear(),
+            m = date.getMonth();
+        return moment(new Date(y, m, 1)).format('DD-MM-YYYY');
+    }
+
+    function getLastDayOfCurrentMonth() {
+        var date = new Date(),
+            y = date.getFullYear(),
+            m = date.getMonth();
+        return moment(new Date(y, m + 1, 0)).format('DD-MM-YYYY');
+    }
+
+    var draggable_el = $('.draggable');
+
+    draggable_el.resizable({
+        containment: 'parent',
+        grid: [100, 0],
+        minWidth: 100
+    });
+
+    draggable_el.draggable({
+        containment: '.droppable-region',
+        delay: 300,
+        grid: [50, 100],
+        cursor: 'move',
+        distance: 50,
+        opacity: 0.3,
+        revert: function () {
+//            This function will be used to check if there is a booking on that time already
+            return false
+        },
+        start: function (event, ui) {
+            ui.helper.css('background-color', 'lightgray');
+//            console.log(ui.position.left)
+        },
+        stop: function (event, ui) {
+            ui.helper.css('background-color', '#2e3133');
+//            console.log(ui.position.left)
+        },
+        create: function (event, ui) {
+//            console.log(event) To get the draggable element object, event.target
+        }
+    });
+
+    $('.day').droppable({
+        drop: function (event, ui) {
+            console.log(ui.draggable);
+            console.log(event.target);
+        },
+        tolerance: 'touch',
+        accept: '.draggable',
+        over: function (event, ui) {
+            ui.draggable.text('Something is hovering!');
+        },
+        out: function (event, ui) {
+            ui.draggable.text('Out!');
+        },
+        create: function (event, ui) {
+            //Launches when the droppable element is created
+        }
+    });
+
+</script>
+</body>
+</html>

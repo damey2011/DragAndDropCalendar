@@ -1,0 +1,103 @@
+.calendar{
+
+}
+
+.right-calendar{
+    /*width: 100%;*/
+}
+
+.header-row, .room-item{
+    height: 70px;
+    box-shadow: 0 1px 0 0 black;
+}
+
+.header-row{
+    height: 40px;
+    border-top: 1px solid black;
+}
+
+.header-row-right{
+    display: inline-block;
+}
+
+.room-item{
+    height: 70px;
+}
+
+.room-item-right{
+    display: block;
+}
+
+.right-col{
+    padding-left: 0;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin-right: 25px;
+}
+
+.left-col{
+    padding-right: 0;
+}
+
+.header-row span{
+    display: inline-block;
+    text-align: center;
+    margin-left: -5.2px;
+}
+
+.info-span{
+    width: 32.1% !important;
+    margin-left: 0 !important;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    box-shadow: inset 1px 0 0 black;
+}
+
+.restricted-area{
+    display: inline-block;
+    height: 100%;
+    box-shadow: inset 1px 1px 0 black;
+}
+
+.restricted-area > span{
+    width: 40px;
+    height: 70px;
+    box-shadow: inset 1px 0 0 black;
+    display: inline-block;
+    margin-right: -5px;
+}
+
+.header-row > span{
+    width: 40px;
+    height: 40px;
+    box-shadow: inset 1px 0 0 0 black;
+
+}
+
+.header-row-right > span{
+    display: inline-block;
+    margin-right: -5px;
+}
+
+.draggable{
+    width: 200px;
+    height: 70px;
+    box-shadow: inset 1px 0 0 0 green;
+    background-color: lightblue;
+    top: -5px;
+    /*left: -5px;*/
+}
+
+.dragged-over{
+    background-color: grey;
+    border: 1px solid darkred;
+}
+
+.droppable-region{
+    width: 680px;
+    position: relative;
+}
+
+/*COPY*/

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Scheduler</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html, body{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        Calendar Scheduler
+    </a>
+</nav>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
+    </div>
+    <div class="col">
+
+        <h2>Calendar</h2>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-4 left-col">
+                <div class="left-calendar">
+                    <div class="header-row">
+                        <span class="info-span">Room</span>
+                        <span class="info-span">Status</span>
+                        <span class="info-span">Capacity</span>
+                        <!--Days of the month-->
+                        <!--<span>1</span>-->
+                        <!--<span>2</span>-->
+                        <!--<span>3</span>-->
+                        <!--<span>4</span>-->
+                        <!--<span>5</span>-->
+                        <!--<span>6</span>-->
+                        <!--<span>7</span>-->
+                        <!--<span>8</span>-->
+                        <!--<span>9</span>-->
+                        <!--<span>10</span>-->
+                        <!--<span>11</span>-->
+                    </div>
+
+                    <div class="room-item">
+                        <span class="info-span">B1</span>
+                        <span class="info-span">Ready</span>
+                        <span class="info-span">3</span>
+                        <!--Days of the month-->
+                        <!--<div class="restricted-area">-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--</div>-->
+                    </div>
+
+                    <div class="room-item">
+                        <span class="info-span">B3</span>
+                        <span class="info-span">Clean up</span>
+                        <span class="info-span">4</span>
+                        <!--Days of the month-->
+                        <!--<div class="restricted-area">-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--<span></span>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col right-col">
+                <div class="right-calendar">
+                    <div class="header-row header-row-right">
+                        <!--Days of the month-->
+                        <span>-</span>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                        <span>17</span>
+                    </div>
+
+                    <div class="droppable-region">
+                        <div class="room-item room-item-right">
+                            <!--Days of the month-->
+                            <div class="restricted-area r-a-1">
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <div class="draggable"></div>
+                            </div>
+                        </div>
+
+                        <div class="room-item room-item-right">
+                            <!--Days of the month-->
+                            <div class="restricted-area r-a-2">
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                                <span class="r-a"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script>
+    $('.draggable').draggable({
+        containment: '.droppable-region',
+        delay: 300,
+        grid: [40, 70],
+        cursor: 'move',
+        refreshPositions: true,
+        scroll: false,
+        snap: '.r-a'
+    });
+
+    $('.r-a').droppable({
+        drop: function (event, ui) {
+            console.log(event);
+            console.log(ui);
+        },
+        hoverClass: 'dragged-over',
+//        tolerance: 'touch',
+        accept: '.draggable',
+        over: function () {
+            $('.draggable').text('Something is hovering!')
+        },
+        out: function () {
+            $('.draggable').text('Out!')
+        }
+    });
+
+    $('.draggable').resizable({
+        containment: '.restricted-area',
+        distance: 20,
+        grid: [40, 0]
+    })
+</script>
+</body>
+</html>
